@@ -1,0 +1,18 @@
+---
+interface Props {
+  href: string;
+  year: number;
+  name: string;
+  meta: string;
+}
+
+const { href, year, name, meta } = Astro.props;
+---
+
+<a href={href}>
+  <span class="object-year">{year}</span>
+  <span>
+    <span class="object-name">{name}</span>
+    <p class="object-meta">{meta}</p>
+  </span>
+</a>

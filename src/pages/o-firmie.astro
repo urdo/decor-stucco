@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import ProofBar from '../components/ProofBar.astro';
+import ProofSlots from '../components/ProofSlots.astro';
+import IllustrativePhoto from '../components/IllustrativePhoto.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { fullAddress, site } from '../data/site';
+---
+
+<Base
+  title="O firmie"
+  description="Decor Stucco Zenon Szczygieł — JDG, NIP, REGON, siedziba w Miedzianej Górze, roboty na obiektach publicznych od 2009."
+>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Dane do weryfikacji</p>
+      <h1 class="page-title">{site.legalName}</h1>
+      <p class="lede">
+        Jednoosobowa działalność gospodarcza. Nie ma KRS — jest NIP i REGON. Rok w stopce:
+        {site.foundedYear} (CEIDG / katalogi). Nie piszemy roku 1999 z katalogów WeNet.
+      </p>
+    </div>
+  </header>
+
+  <ProofBar />
+
+  <section class="section wrap split">
+    <article class="prose">
+      <h2>Co robimy</h2>
+      <p>
+        Wykonawstwo robót budowlanych na obiektach publicznych: elewacje, izolacje, remonty i
+        renowacje zabytków, wykończenia wynikające z konkretnego zamówienia. Klient strony to
+        przede wszystkim zamawiający publiczny — gmina, uczelnia, urząd, instytucja kultury —
+        nie właściciel mieszkania szukający stiuku do salonu.
+      </p>
+      <h2>Gdzie</h2>
+      <p>
+        {site.reachNote} Na stronie nie obiecujemy „całej Polski”, dopóki właściciel tego nie
+        potwierdzi.
+      </p>
+      <h2>Czego tu nie ma</h2>
+      <ul>
+        <li>Sum obrotów z Atlasa Przetargów ani z eGospodarki.</li>
+        <li>Telefonu i maila z katalogów firm — do zgody na publikację.</li>
+        <li>Certyfikatów, których nie ma w skanie (żadnych 404 pod „ISO”).</li>
+        <li>Przetargów siostrzanej marki ARCO-BUD.</li>
+        <li>Cennika self-service i recenzji, których nie zebrano.</li>
+      </ul>
+      <h2>Osoba do ofert</h2>
+      <p>
+        {
+          site.contactPerson
+            ? site.contactPerson
+            : 'Imię i nazwisko osoby podpisującej oferty — do uzupełnienia przez właściciela. Do tego czasu korespondencja idzie na formularz.'
+        }
+      </p>
+    </article>
+    <div>
+      <IllustrativePhoto
+        src="images/wapien.jpg"
+        alt="Faktura wapienia i tynku, ujęcie materiałowe."
+      />
+      <ul class="meta-list">
+        <li><span>NIP</span> {site.nip}</li>
+        <li><span>REGON</span> {site.regon}</li>
+        <li><span>Adres</span> {fullAddress()}</li>
+        <li><span>VAT</span> czynny od {site.vatSince}</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="section-head">
+      <h2>Stos dowodów</h2>
+      <p>Puste ramki są celowe. Lepsze niż martwy plik „certyfikat.pdf”.</p>
+    </div>
+    <ProofSlots />
+  </section>
+
+  <CtaBand />
+</Base>

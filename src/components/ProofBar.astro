@@ -1,0 +1,22 @@
+---
+import { fullAddress, site } from '../data/site';
+---
+
+<dl class="proof-bar wrap">
+  <div class="proof-item">
+    <dt>Forma</dt>
+    <dd>JDG · {site.owner}</dd>
+  </div>
+  <div class="proof-item">
+    <dt>NIP</dt>
+    <dd>{site.nip}</dd>
+  </div>
+  <div class="proof-item">
+    <dt>REGON</dt>
+    <dd>{site.regon}</dd>
+  </div>
+  <div class="proof-item">
+    <dt>Siedziba</dt>
+    <dd>{fullAddress()}</dd>
+  </div>
+</dl>

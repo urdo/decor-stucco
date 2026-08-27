@@ -1,0 +1,27 @@
+---
+const slots = [
+  {
+    title: 'Polisa OC',
+    body: 'Suma i zakres — po skanie od właściciela. Nie publikujemy polisy, której nie mamy.',
+  },
+  {
+    title: 'Referencja / protokół',
+    body: 'PDF „należyte wykonanie” pod SIWZ. Priorytet: Józefów, CMKP, WDK, PW.',
+  },
+  {
+    title: 'Uprawnienia i WKZ',
+    body: 'Kierownik, ISO, pozwolenie konserwatorskie — tylko dokumenty, które istnieją.',
+  },
+];
+---
+
+<div class="proof-slots">
+  {
+    slots.map((slot) => (
+      <aside class="proof-slot">
+        <h3>{slot.title}</h3>
+        <p>{slot.body}</p>
+      </aside>
+    ))
+  }
+</div>

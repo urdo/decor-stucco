@@ -1,0 +1,59 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PhotoFrame from '../../components/PhotoFrame.astro';
+import ProofSlots from '../../components/ProofSlots.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+export async function getStaticPaths() {
+  const items = await getCollection('realizacje');
+  return items.map((item) => ({
+    params: { slug: item.id },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+const base = import.meta.env.BASE_URL;
+const pillarLabel = {
+  elewacje: 'Elewacje',
+  izolacje: 'Izolacje',
+  zabytki: 'Zabytki',
+  inne: 'Zakres towarzyszący',
+}[item.data.pillar];
+---
+
+<Base
+  title={item.data.title}
+  description={`${item.data.object}, ${item.data.client}, ${item.data.year}. ${item.data.scope}`}
+>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">{item.data.year} · {pillarLabel}</p>
+      <h1 class="page-title">{item.data.object}</h1>
+      <ul class="meta-list">
+        <li><span>Zamawiający</span> {item.data.client}</li>
+        <li><span>Lokalizacja</span> {item.data.location}</li>
+        <li><span>Zakres</span> {item.data.scope}</li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="section wrap split">
+    <article class="prose">
+      <Content />
+      <p class="caption">{item.data.sourceNote}</p>
+      <p><a href={`${base}realizacje/`}>← Wszystkie realizacje</a></p>
+    </article>
+    <div>
+      <PhotoFrame label={`Fotografia: ${item.data.object}`} />
+      <p class="caption" style="margin-top: 1.25rem;">Dokumenty do tej pozycji</p>
+      <div style="margin-top: 0.75rem;">
+        <ProofSlots />
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="To podobny obiekt?" text="Napisz, jaki gmach i jaki zakres. Nie publikujemy referencji, których nie mamy w PDF." />
+</Base>

@@ -1,0 +1,71 @@
+---
+import { nav, site } from '../data/site';
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+const baseNoSlash = base.replace(/\/+$/, '') || '';
+
+let path = Astro.url.pathname;
+if (baseNoSlash && path.startsWith(baseNoSlash)) {
+  path = path.slice(baseNoSlash.length) || '/';
+}
+path = path.replace(/\/+$/, '') || '/';
+
+function href(to: string) {
+  return `${base}${to.replace(/^\//, '')}`;
+}
+
+function isCurrent(itemHref: string) {
+  const clean = itemHref.replace(/\/+$/, '') || '/';
+  return path === clean || path.startsWith(`${clean}/`);
+}
+---
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="wordmark" href={base}>
+      <span class="wordmark-name">{site.name}</span>
+      <span class="wordmark-sub">{site.owner}</span>
+    </a>
+    <nav class="nav-desktop" aria-label="Główne">
+      {
+        nav.map((item) => (
+          <a href={href(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+      <a class="btn" href={href('/kontakt/')}>Zapytanie</a>
+    </nav>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="menu-mobilne"
+      aria-label="Otwórz menu"
+      data-menu-toggle
+    >
+      <span class="burger" aria-hidden="true"></span>
+    </button>
+  </div>
+  <nav class="nav-mobile wrap" id="menu-mobilne" data-menu>
+    {
+      nav.map((item) => (
+        <a href={href(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))
+    }
+    <a href={href('/kontakt/')}>Zapytanie o ofertę</a>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const menu = document.querySelector('[data-menu]');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
+  });
+</script>

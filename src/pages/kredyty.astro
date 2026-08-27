@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+
+const credits = [
+  {
+    file: 'elewacja.jpg',
+    work: 'Współczesna fasada — klimat architektoniczny',
+    author: 'Pexels',
+    license: 'Pexels License',
+    url: 'https://www.pexels.com/photo/323780/',
+  },
+  {
+    file: 'zabytki.jpg',
+    work: 'Pałac w Piotrkowicach (zabytek) — klimat dziedzictwa, nie realizacja firmy',
+    author: 'Bonio',
+    license: 'CC BY-SA 3.0',
+    url: 'https://commons.wikimedia.org/wiki/File:Piotrkowice,_pa%C5%82ac.jpg',
+  },
+  {
+    file: 'kamien.jpg',
+    work: 'Otoczaki / materiał — klimat izolacji i kamienia',
+    author: 'Pexels',
+    license: 'Pexels License',
+    url: 'https://www.pexels.com/photo/1029604/',
+  },
+  {
+    file: 'wapien.jpg',
+    work: 'Faktura tynku / stiuku',
+    author: 'Tomwsulcer',
+    license: 'CC0',
+    url: 'https://commons.wikimedia.org/wiki/File:Surfaces_wall_closeup_view.JPG',
+  },
+  {
+    file: 'rusztowanie.jpg',
+    work: 'Rusztowanie / konstrukcja przy elewacji',
+    author: 'ralmonline alm',
+    license: 'CC BY 2.0',
+    url: 'https://commons.wikimedia.org/wiki/File:Scaffolding_For_Renovation_(8054252206).jpg',
+  },
+];
+---
+
+<Base
+  title="Zdjęcia ilustracyjne"
+  description="Atrybucja zdjęć użytych na stronie Decor Stucco. Żadne nie jest dokumentacją robót firmy."
+>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Atrybucja</p>
+      <h1 class="page-title">Zdjęcia ilustracyjne</h1>
+      <p class="lede">
+        Kadry z Pexels i Wikimedia Commons. Służą jako klimat materiałowy i architektoniczny. Nie
+        przedstawiają budów Decor Stucco.
+      </p>
+    </div>
+  </header>
+
+  <section class="section wrap">
+    <ul class="object-grid" style="list-style: none; padding: 0;">
+      {
+        credits.map((item) => (
+          <li class="object-static">
+            <span class="object-year">{item.file}</span>
+            <span>
+              <span class="object-name">{item.work}</span>
+              <p class="object-meta">
+                {item.author} · {item.license} ·{' '}
+                <a href={item.url} rel="noopener noreferrer">
+                  źródło
+                </a>
+              </p>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

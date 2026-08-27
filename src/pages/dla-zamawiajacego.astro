@@ -1,0 +1,113 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
+---
+
+<Base
+  title="Dla zamawiającego"
+  description="Informacje dla zamawiającego publicznego: jak czytać zakres Decor Stucco, jakie dokumenty są na stronie, czego nie ma, FAQ pod SIWZ."
+>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Wiedza</p>
+      <h1 class="page-title">Dla zamawiającego publicznego</h1>
+      <p class="lede">
+        Krótko: kim jesteśmy w postępowaniu, jakie roboty umiemy nazwać, czego nie obiecujemy
+        bez skanu. To nie jest poradnik prawny i nie zastępuje SIWZ.
+      </p>
+    </div>
+  </header>
+
+  <section class="section wrap">
+    <article class="prose">
+      <h2>Checklista przed zapytaniem</h2>
+      <ul>
+        <li>Obiekt i adres — choćby roboczo.</li>
+        <li>Zakres: elewacja, izolacja, zabytek, inny (PPOŻ, instalacje — tylko jeśli tak jest w dokumentacji).</li>
+        <li>Czy obiekt jest wpisany / objęty ochroną konserwatorską.</li>
+        <li>Termin: postępowanie, zapytanie ofertowe, czy rozpoznanie rynku.</li>
+        <li>Czy potrzebujecie wykazu realizacji z nazwą zamawiającego do załącznika.</li>
+      </ul>
+
+      <h2>Co można sprawdzić bez telefonu</h2>
+      <p>
+        NIP {site.nip}, REGON {site.regon}, forma JDG, adres {site.address.city}. Wykaz
+        realizacji na tej stronie odpowiada publicznym ogłoszeniom (obiekt, zamawiający, rok,
+        zakres). Kwot umów tu nie publikujemy.
+      </p>
+
+      <h2>Dokumenty, których jeszcze nie ma w pliku</h2>
+      <p>
+        Polisa OC (suma), ISO, uprawnienia kierownika, pozwolenie WKZ, referencja z klauzulą
+        należytego wykonania. Gdy właściciel przekaże PDF, wstawimy je do pobrania. Do tego
+        czasu nie ma „pobierz certyfikat” prowadzącego donikąd.
+      </p>
+    </article>
+
+    <div class="faq" style="margin-top: 3rem; max-width: 40rem;">
+      <h2 class="page-title" style="font-size: 1.85rem; margin-bottom: 1rem;">Pytania</h2>
+
+      <details>
+        <summary>Czy to firma od sztukaterii i tynków dekoracyjnych?</summary>
+        <p>
+          Nazwa pochodzi z rzemiosła. Publiczny portfel to roboty budowlane na obiektach
+          publicznych. Sztukaterię salonową jako ofertę sklepową potwierdzimy tylko, jeśli
+          właściciel tak zdecyduje.
+        </p>
+      </details>
+      <details>
+        <summary>Czy startujecie wyłącznie jako wykonawca zamówienia publicznego?</summary>
+        <p>
+          Publicznie widać wygrane postępowania. Czy firma bierze podwykonawstwo od generalnego
+          — pytanie do właściciela. Formularz przyjmuje oba typy zapytań.
+        </p>
+      </details>
+      <details>
+        <summary>Czy macie pozwolenie konserwatorskie WKZ?</summary>
+        <p>
+          Publicznie nie znaleziono numeru pozwolenia. Na obiektach zabytkowych (dworek, sąd,
+          PKiN, Łucznica) widać roboty w reżimie dziedzictwa. Numer i skan — po stronie
+          właściciela, bez zgadywania.
+        </p>
+      </details>
+      <details>
+        <summary>Jaka jest gwarancja w latach?</summary>
+        <p>
+          Nie podajemy liczby, której nie ma w dokumencie. Ramka na stronie realizacji czeka na
+          wartość z umowy / karty gwarancyjnej.
+        </p>
+      </details>
+      <details>
+        <summary>Czy podajecie doświadczenie w złotych?</summary>
+        <p>
+          Nie. Agregatory (Atlas, eGospodarka) liczą inaczej; suma z portalu nie idzie na
+          stronę. Do SIWZ liczy się załącznik, który podpisze wykonawca.
+        </p>
+      </details>
+      <details>
+        <summary>Jaki jest zasięg?</summary>
+        <p>
+          {site.reachNote} Obietnica „cała Polska” pojawi się wyłącznie po decyzji właściciela.
+        </p>
+      </details>
+      <details>
+        <summary>Jak odróżnić Decor Stucco od ARCO-BUD?</summary>
+        <p>
+          To osobne podmioty. Na tej stronie nie ma przetargów ARCO-BUD. Ten sam gmach (np.
+          Elektronika PW) może mieć roboty obu marek w różnych latach — nie mieszamy ich w
+          jednym portfolio.
+        </p>
+      </details>
+      <details>
+        <summary>Czy zdjęcia na stronie to Wasze budowy?</summary>
+        <p>
+          Nie. Zdjęcia z Unsplash/Pexels są ilustracyjne i tak podpisane. Realizacje mają puste
+          ramki na fotografię obiektu od właściciela.
+        </p>
+      </details>
+    </div>
+  </section>
+
+  <CtaBand title="Zapytanie do postępowania" />
+</Base>

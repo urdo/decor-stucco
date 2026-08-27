@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { fullAddress, site } from '../data/site';
+---
+
+<Base
+  title="Kontakt"
+  description="Zapytanie o ofertę lub udział w postępowaniu — Decor Stucco Zenon Szczygieł. Formularz, dane JDG, NIP i adres siedziby."
+>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Kontakt</p>
+      <h1 class="page-title">Zapytanie o ofertę lub postępowanie</h1>
+      <p class="lede">
+        Napisz, jaki obiekt i jaki zakres. Telefon i e-mail z katalogów internetowych nie są
+        na stronie, dopóki właściciel nie wskaże danych do publikacji.
+      </p>
+    </div>
+  </header>
+
+  <section class="section wrap split">
+    <ContactForm />
+    <aside>
+      <h2 class="page-title" style="font-size: 1.5rem;">Dane rejestrowe</h2>
+      <ul class="meta-list">
+        <li><span>Firma</span> {site.legalName}</li>
+        <li><span>NIP</span> {site.nip}</li>
+        <li><span>REGON</span> {site.regon}</li>
+        <li><span>Adres</span> {fullAddress()}</li>
+        <li>
+          <span>E-mail</span>
+          {site.email ? site.email : 'do potwierdzenia przez właściciela'}
+        </li>
+        <li>
+          <span>Telefon</span>
+          {site.phone ? site.phone : 'do potwierdzenia przez właściciela'}
+        </li>
+        <li>
+          <span>Osoba</span>
+          {site.contactPerson ? site.contactPerson : 'do wskazania przez właściciela'}
+        </li>
+      </ul>
+    </aside>
+  </section>
+</Base>

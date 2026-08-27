@@ -1,0 +1,49 @@
+---
+import { fullAddress, nav, site } from '../data/site';
+
+const base = import.meta.env.BASE_URL;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <div class="footer-brand">{site.name}</div>
+      <p class="footer-meta" style="margin-top: 0.75rem;">
+        {site.legalName}<br />
+        Jednoosobowa działalność gospodarcza
+      </p>
+    </div>
+    <div class="footer-meta">
+      <span>NIP {site.nip}</span>
+      <span>REGON {site.regon}</span>
+      <span>{fullAddress()}</span>
+      <span>VAT czynny od {site.vatSince}</span>
+      {
+        site.email ? (
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        ) : (
+          <span>E-mail do publikacji — po potwierdzeniu właściciela</span>
+        )
+      }
+      {
+        site.phone ? (
+          <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a>
+        ) : (
+          <span>Telefon do publikacji — po potwierdzeniu właściciela</span>
+        )
+      }
+    </div>
+    <nav class="footer-nav" aria-label="Stopka">
+      {nav.map((item) => (
+        <a href={`${base}${item.href.replace(/^\//, '')}`}>{item.label}</a>
+      ))}
+      <a href={`${base}polityka-prywatnosci/`}>Polityka prywatności</a>
+      <a href={`${base}kredyty/`}>Zdjęcia ilustracyjne</a>
+    </nav>
+  </div>
+  <div class="wrap legal">
+    © {site.foundedYear}–{year} {site.legalName}. Teksty na stronie są opracowaniem redakcyjnym na podstawie
+    publicznych ogłoszeń o zamówieniach; nie zastępują dokumentów oferty.
+  </div>
+</footer>

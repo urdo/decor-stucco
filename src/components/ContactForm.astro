@@ -1,0 +1,120 @@
+---
+import { site, web3formsKey } from '../data/site';
+
+const key = web3formsKey();
+const email = site.email;
+const base = import.meta.env.BASE_URL;
+---
+
+<form class="form" method="POST" data-contact-form data-email={email}>
+  {key && <input type="hidden" name="access_key" value={key} />}
+  <input type="hidden" name="subject" value="Zapytanie ze strony Decor Stucco" />
+  <input type="checkbox" name="botcheck" style="display: none;" tabindex="-1" autocomplete="off" />
+
+  <label>
+    Imię i nazwisko
+    <input type="text" name="name" autocomplete="name" required />
+  </label>
+  <label>
+    Instytucja / zamawiający
+    <input type="text" name="institution" autocomplete="organization" />
+  </label>
+  <label>
+    E-mail
+    <input type="email" name="email" autocomplete="email" required />
+  </label>
+  <label>
+    Telefon
+    <input type="tel" name="phone" autocomplete="tel" />
+  </label>
+  <label>
+    Rodzaj sprawy
+    <select name="topic" required>
+      <option value="">Wybierz</option>
+      <option value="postepowanie">Postępowanie / zapytanie ofertowe</option>
+      <option value="oferta">Oferta na wskazany zakres</option>
+      <option value="inne">Inne</option>
+    </select>
+  </label>
+  <label>
+    Wiadomość
+    <textarea name="message" required placeholder="Obiekt, zakres, termin, numer postępowania jeśli jest."></textarea>
+  </label>
+  <label class="check">
+    <input type="checkbox" name="rodo" required />
+    <span>
+      Wyrażam zgodę na przetwarzanie danych w celu odpowiedzi na zapytanie.
+      Administrator: {site.legalName}. Szczegóły w
+      <a href={`${base}polityka-prywatnosci/`}>polityce prywatności</a>.
+    </span>
+  </label>
+  <button class="btn" type="submit">Wyślij zapytanie</button>
+  <p class="form-status" data-form-status role="status"></p>
+  <p class="form-note">
+    {
+      key
+        ? 'Formularz idzie przez Web3Forms. Nie publikujemy na stronie telefonu ani maila z katalogów firm, dopóki właściciel ich nie potwierdzi.'
+        : email
+          ? `Brak klucza Web3Forms — wiadomość otworzy program pocztowy na adres ${email}.`
+          : 'Adres odbioru formularza i telefon nie są jeszcze opublikowane (czekamy na zgodę właściciela). Po wysłaniu zobaczysz treść gotową do skopiowania.'
+    }
+  </p>
+</form>
+
+<script>
+  const form = document.querySelector('[data-contact-form]');
+  const status = document.querySelector('[data-form-status]');
+  const hasKey = Boolean(form?.querySelector('input[name="access_key"]'));
+
+  form?.addEventListener('submit', async (event) => {
+    if (hasKey) {
+      event.preventDefault();
+      const body = new FormData(form);
+      status.textContent = 'Wysyłanie…';
+      status.setAttribute('data-state', '');
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body,
+        });
+        const json = await res.json();
+        if (json.success) {
+          form.reset();
+          status.textContent = 'Wiadomość została wysłana. Odpowiemy w dniach roboczych.';
+          status.setAttribute('data-state', 'ok');
+        } else {
+          throw new Error(json.message || 'Błąd wysyłki');
+        }
+      } catch {
+        status.textContent = 'Nie udało się wysłać. Spróbuj ponownie albo użyj danych z stopki, gdy będą opublikowane.';
+        status.setAttribute('data-state', 'err');
+      }
+      return;
+    }
+
+    event.preventDefault();
+    const data = new FormData(form);
+    const lines = [
+      `Imię: ${data.get('name')}`,
+      `Instytucja: ${data.get('institution')}`,
+      `E-mail: ${data.get('email')}`,
+      `Telefon: ${data.get('phone')}`,
+      `Temat: ${data.get('topic')}`,
+      '',
+      String(data.get('message') || ''),
+    ];
+    const body = lines.join('\n');
+    const mail = form.dataset.email;
+    if (mail) {
+      const href = `mailto:${mail}?subject=${encodeURIComponent('Zapytanie ze strony Decor Stucco')}&body=${encodeURIComponent(body)}`;
+      window.location.href = href;
+      status.textContent = 'Otwarto program pocztowy.';
+      status.setAttribute('data-state', 'ok');
+    } else {
+      status.textContent =
+        'Brak opublikowanego adresu e-mail. Skopiuj treść zapytania i przekaż ją właścicielowi firmy, gdy potwierdzi kontakt:\n\n' +
+        body;
+      status.setAttribute('data-state', 'ok');
+    }
+  });
+</script>

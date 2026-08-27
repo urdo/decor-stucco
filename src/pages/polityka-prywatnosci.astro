@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import { fullAddress, site } from '../data/site';
+---
+
+<Base
+  title="Polityka prywatności"
+  description="Polityka prywatności strony Decor Stucco — administrator, formularz kontaktowy, dane publikowane z rejestrów."
+>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">RODO</p>
+      <h1 class="page-title">Polityka prywatności</h1>
+    </div>
+  </header>
+
+  <section class="section wrap">
+    <article class="prose">
+      <p>
+        Administratorem danych jest {site.legalName}, {fullAddress()}, NIP {site.nip}, REGON{' '}
+        {site.regon} (jednoosobowa działalność gospodarcza).
+      </p>
+      <h2>Jakie dane zbieramy</h2>
+      <p>
+        Przez formularz: imię i nazwisko, instytucja, e-mail, telefon, treść zapytania oraz
+        zgoda. Dane służą wyłącznie odpowiedzi na wiadomość. Podstawa: art. 6 ust. 1 lit. b
+        oraz lit. a RODO (działania przed zawarciem umowy / zgoda).
+      </p>
+      <h2>Jak długo</h2>
+      <p>
+        Korespondencję przechowujemy do 24 miesięcy od ostatniej wiadomości w sprawie, chyba
+        że dłuższy okres wynika z dochodzenia roszczeń lub obowiązku prawnego.
+      </p>
+      <h2>Odbiorcy</h2>
+      <p>
+        Jeśli formularz działa przez Web3Forms, treść przechodzi przez ich przetwarzanie w
+        celu dostarczenia wiadomości na skrzynkę administratora. Nie sprzedajemy danych.
+      </p>
+      <h2>Prawa</h2>
+      <p>
+        Przysługuje dostęp, sprostowanie, usunięcie, ograniczenie, sprzeciw, przeniesienie
+        oraz skarga do Prezesa UODO. Żądania: przez formularz (do publikacji stałego adresu
+        e-mail) albo na adres siedziby.
+      </p>
+      <h2>Dane już publiczne</h2>
+      <p>
+        NIP, REGON, forma, adres siedziby pochodzą z publicznych rejestrów i wykazów
+        zamówień. Nie publikujemy telefonu ani prywatnego e-maila z katalogów bez zgody.
+      </p>
+      <h2>Cookies</h2>
+      <p>
+        Strona statyczna nie wstawia analityki ani pikseli reklamowych. Serwer GitHub Pages
+        może logować żądania techniczne zgodnie z własną polityką hosta.
+      </p>
+    </article>
+  </section>
+</Base>

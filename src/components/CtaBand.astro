@@ -1,0 +1,23 @@
+---
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = 'Zapytanie do postępowania lub oferty',
+  text = 'Opisz obiekt, zakres i termin. Odpowiadamy jako wykonawca robót — nie prowadzimy sklepu ze sztukaterią.',
+} = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="cta-band">
+  <div class="wrap">
+    <p class="kicker" style="color: #c9a58a;">Kontakt</p>
+    <h2>{title}</h2>
+    <p>{text}</p>
+    <p style="margin-top: 1.5rem;">
+      <a class="btn" href={`${base}kontakt/`}>Wyślij zapytanie</a>
+    </p>
+  </div>
+</section>

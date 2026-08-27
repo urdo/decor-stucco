@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Base
+  title="Nie znaleziono strony"
+  description="Podany adres nie istnieje na stronie Decor Stucco."
+  noindex
+>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">404</p>
+      <h1 class="page-title">Nie ma takiej strony</h1>
+      <p class="lede">
+        Sprawdź adres albo wróć do <a href={base}>strony głównej</a>,
+        <a href={`${base}realizacje/`}>realizacji</a>
+        albo <a href={`${base}kontakt/`}>kontaktu</a>.
+      </p>
+    </div>
+  </header>
+</Base>
