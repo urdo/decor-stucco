@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import ProofBar from '../components/ProofBar.astro';
 import ObjectRow from '../components/ObjectRow.astro';
 import IllustrativePhoto from '../components/IllustrativePhoto.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -11,14 +10,37 @@ import { absUrl } from '../lib/urls';
 
 const base = import.meta.env.BASE_URL;
 const uslugi = (await getCollection('uslugi')).sort((a, b) => a.data.order - b.data.order);
-const featured = (await getCollection('realizacje'))
+const all = await getCollection('realizacje');
+const featured = all
   .filter((item) => item.data.featured)
   .sort((a, b) => b.data.year - a.data.year);
+
+/** Trzy karty jak w mockupie D — prawdziwe obiekty z portfela */
+const cardIds = [
+  'gmach-elektroniki-pw',
+  'teatr-dramatyczny-pkin',
+  'muw-marszalkowska',
+];
+const cards = cardIds
+  .map((id, i) => {
+    const item = all.find((x) => x.id === id);
+    if (!item) return null;
+    return {
+      href: `${base}realizacje/${item.id}/`,
+      name: item.data.object,
+      meta: `${item.data.year} · ${item.data.client}`,
+      image: `images/card-${i + 1}.jpg`,
+    };
+  })
+  .filter(Boolean);
+
+const heroSrc = `${base}images/hero-cinematic-dusk.jpg`;
 ---
 
 <Base
   title={site.name}
   description="Decor Stucco Zenon Szczygieł — wykonawca robót elewacyjnych, izolacyjnych i renowacyjnych na obiektach publicznych. NIP, realizacje z nazwami, Mazowsze i Świętokrzyskie."
+  ogImage="images/hero-cinematic-dusk.jpg"
   jsonLd={[
     itemListNode({
       url: absUrl(),
@@ -30,20 +52,52 @@ const featured = (await getCollection('realizacje'))
     }),
   ]}
 >
-  <section class="hero wrap">
-    <p class="kicker">Wykonawca obiektów publicznych</p>
-    <h1>{site.tagline}</h1>
-    <p class="lede">
-      {site.legalName}. Realizacje dla uczelni, urzędów, sądów i instytucji kultury.
-      {site.reach}. To nie jest sklep ze sztukaterią — to wizytówka wykonawcy z nazwanymi gmachami.
-    </p>
-    <div class="hero-actions">
-      <a class="btn" href={`${base}kontakt/`}>Zapytanie o ofertę</a>
-      <a class="btn btn-ghost" href={`${base}realizacje/`}>Nazwane realizacje</a>
+  <section class="hero-cinematic" aria-label="Wstęp">
+    <div class="hero-media" aria-hidden="true">
+      <img
+        src={heroSrc}
+        alt=""
+        width="2400"
+        height="1600"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <div class="hero-scrim"></div>
+    </div>
+    <div class="hero-content wrap">
+      <h1>Nazwane realizacje.<br />Sprawdzalne dane.</h1>
+      <p class="lede">Fasady dla instytucji publicznych, które stoją na lata.</p>
+      <div class="hero-actions">
+        <a class="btn" href={`${base}kontakt/`}>Zapytanie</a>
+        <a class="btn btn-ghost" href={`${base}realizacje/`}>Realizacje</a>
+      </div>
     </div>
   </section>
 
-  <ProofBar />
+  <section class="featured-strip" aria-label="Wybrane realizacje">
+    <div class="wrap">
+      <p class="featured-label">Wybrane realizacje</p>
+      <div class="featured-cards">
+        {
+          cards.map((card) => (
+            <a class="featured-card" href={card!.href}>
+              <img
+                src={`${base}${card!.image}`}
+                alt=""
+                width="900"
+                height="560"
+                loading="lazy"
+              />
+              <span class="featured-card-caption">
+                <span class="featured-card-name">{card!.name}</span>
+                <span class="featured-card-meta">{card!.meta}</span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
   <section class="section wrap">
     <div class="split">
