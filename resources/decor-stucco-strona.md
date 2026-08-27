@@ -132,6 +132,7 @@ Zakres i marka
 Realizacje
 - [ ] Które 8–12 obiektów z listy wolno pokazać ze zdjęciem i nazwą zamawiającego?
 - [ ] 15–30 zdjęć (elewacja, detal zabytku, attyka, dworek) z podpisem: kto / gdzie / rok. Zero stocku.
+- [ ] Potrzebujemy **również zdjęć z pracownikami** — nie tylko samego obiektu. Np. ekipa na rusztowaniach, prace remontowe, zabezpieczenie terenu, roboty budowlane. Podpis: kto / gdzie / rok / co widać. Zgoda na publikację wizerunku osób.
 - [ ] Czy jest protokół / referencja pisemna do którejkolwiek (Józefów, CMKP, WDK, PW)?
 
 Firma i kontakt
@@ -202,8 +203,9 @@ Pozostałe z tabeli BZP (MSZ, GUS, MSWiA, Prażaki, Solidarności 81): pełna li
 
 **Fotografie (priorytet)**
 - [ ] 15–30 zdjęć JPG, min. bok 1600 px
-- [ ] Podpis w nazwie pliku lub liście: obiekt, zamawiający, rok, co widać (elewacja / detal / attyka / dworek / rusztowanie)
-- [ ] Zgoda na publikację (obiekty publiczne — i tak pytamy)
+- [ ] Podpis w nazwie pliku lub liście: obiekt, zamawiający, rok, co widać (elewacja / detal / attyka / dworek / rusztowanie / ekipa / zabezpieczenie terenu / roboty)
+- [ ] Część zdjęć z **pracownikami przy pracy**: na rusztowaniach, prace remontowe, zabezpieczenie terenu, roboty budowlane — żeby strona pokazywała wykonawcę, nie sam gmach
+- [ ] Zgoda na publikację obiektu **oraz wizerunku osób** na zdjęciach
 - [ ] Logo (SVG lub PNG na jasnym tle) albo decyzja: zostaje wordmark z nazwy
 - [ ] Zdjęcie / skan pieczątki nie jest potrzebny
 
