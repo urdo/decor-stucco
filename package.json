@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.3.1",
-    "@fontsource/ibm-plex-sans": "^5.2.5",
-    "@fontsource/newsreader": "^5.2.6",
+    "@fontsource/dm-sans": "^5.3.0",
+    "@fontsource/syne": "^5.3.0",
     "astro": "^5.13.2"
   }
 }

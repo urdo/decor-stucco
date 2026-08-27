@@ -14,11 +14,13 @@ const uslugi = (await getCollection('uslugi')).sort((a, b) => a.data.order - b.d
 const featured = (await getCollection('realizacje'))
   .filter((item) => item.data.featured)
   .sort((a, b) => b.data.year - a.data.year);
+const heroSrc = `${base}images/zabytki.jpg`;
 ---
 
 <Base
   title={site.name}
   description="Decor Stucco Zenon Szczygieł — wykonawca robót elewacyjnych, izolacyjnych i renowacyjnych na obiektach publicznych. NIP, realizacje z nazwami, Mazowsze i Świętokrzyskie."
+  ogImage="images/zabytki.jpg"
   jsonLd={[
     itemListNode({
       url: absUrl(),
@@ -30,16 +32,30 @@ const featured = (await getCollection('realizacje'))
     }),
   ]}
 >
-  <section class="hero wrap">
-    <p class="kicker">Wykonawca obiektów publicznych</p>
-    <h1>{site.tagline}</h1>
-    <p class="lede">
-      {site.legalName}. Realizacje dla uczelni, urzędów, sądów i instytucji kultury.
-      {site.reach}. To nie jest sklep ze sztukaterią — to wizytówka wykonawcy z nazwanymi gmachami.
-    </p>
-    <div class="hero-actions">
-      <a class="btn" href={`${base}kontakt/`}>Zapytanie o ofertę</a>
-      <a class="btn btn-ghost" href={`${base}realizacje/`}>Nazwane realizacje</a>
+  <section class="hero-cinematic" aria-label="Wstęp">
+    <div class="hero-media" aria-hidden="true">
+      <img
+        src={heroSrc}
+        alt=""
+        width="2400"
+        height="1600"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <div class="hero-scrim"></div>
+    </div>
+    <div class="hero-content wrap">
+      <p class="kicker">Wykonawca obiektów publicznych</p>
+      <p class="hero-brand">{site.name}</p>
+      <h1>Nazwane realizacje. Sprawdzalne dane.</h1>
+      <p class="lede">
+        Elewacje, izolacje i renowacje zabytków dla uczelni, urzędów, sądów i instytucji kultury.
+        {site.reach}.
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href={`${base}kontakt/`}>Zapytanie o ofertę</a>
+        <a class="btn btn-ghost" href={`${base}realizacje/`}>Nazwane realizacje</a>
+      </div>
     </div>
   </section>
 
