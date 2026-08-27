@@ -10,6 +10,7 @@ if (baseNoSlash && path.startsWith(baseNoSlash)) {
   path = path.slice(baseNoSlash.length) || '/';
 }
 path = path.replace(/\/+$/, '') || '/';
+const isHome = path === '/';
 
 function href(to: string) {
   return `${base}${to.replace(/^\//, '')}`;
@@ -21,11 +22,10 @@ function isCurrent(itemHref: string) {
 }
 ---
 
-<header class="site-header">
+<header class:list={['site-header', { 'is-solid': !isHome }]} data-site-header data-home={isHome ? '1' : '0'}>
   <div class="wrap header-inner">
     <a class="wordmark" href={base}>
-      <span class="wordmark-name">{site.name}</span>
-      <span class="wordmark-sub">{site.owner}</span>
+      <span class="wordmark-name">Decor Stucco</span>
     </a>
     <nav class="nav-desktop" aria-label="Główne">
       {
@@ -35,7 +35,6 @@ function isCurrent(itemHref: string) {
           </a>
         ))
       }
-      <a class="btn" href={href('/kontakt/')}>Zapytanie</a>
     </nav>
     <button
       class="menu-toggle"
@@ -57,16 +56,32 @@ function isCurrent(itemHref: string) {
         </a>
       ))
     }
-    <a href={href('/kontakt/')}>Zapytanie o ofertę</a>
   </nav>
 </header>
 
 <script>
   const toggle = document.querySelector('[data-menu-toggle]');
   const menu = document.querySelector('[data-menu]');
+  const header = document.querySelector('[data-site-header]');
+  const isHome = header?.getAttribute('data-home') === '1';
+
   toggle?.addEventListener('click', () => {
     const open = menu?.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     toggle.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
+    if (isHome && open) header?.classList.add('is-solid');
+    if (isHome && !open && window.scrollY < 40) header?.classList.remove('is-solid');
   });
+
+  if (isHome && header) {
+    const onScroll = () => {
+      if (window.scrollY > 40 || menu?.classList.contains('is-open')) {
+        header.classList.add('is-solid');
+      } else {
+        header.classList.remove('is-solid');
+      }
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
 </script>
