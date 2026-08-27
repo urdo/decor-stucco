@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
 import IllustrativePhoto from '../../components/IllustrativePhoto.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { breadcrumbNode, itemListNode } from '../../lib/jsonld';
@@ -29,16 +30,11 @@ const uslugi = (await getCollection('uslugi')).sort((a, b) => a.data.order - b.d
     ]),
   ]}
 >
-  <header class="page-hero">
-    <div class="wrap">
-      <p class="kicker">Zakres</p>
-      <h1 class="page-title">Roboty nazwane, nie PKD</h1>
-      <p class="lede">
-        Trzy filary odpowiadają temu, co firma wygrywa w zamówieniach publicznych. Klatki PPOŻ
-        i instalacje pokazujemy przy konkretnych obiektach, nie jako osobny sklep usług.
-      </p>
-    </div>
-  </header>
+  <PageHero
+    kicker="Zakres"
+    title="Roboty nazwane, nie PKD"
+    lede="Trzy filary odpowiadają temu, co firma wygrywa w zamówieniach publicznych. Klatki PPOŻ i instalacje pokazujemy przy konkretnych obiektach, nie jako osobny sklep usług."
+  />
 
   <section class="section wrap">
     <div class="card-grid">

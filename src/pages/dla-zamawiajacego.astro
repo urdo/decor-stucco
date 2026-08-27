@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { faqItems } from '../data/faq';
 import { site } from '../data/site';
@@ -19,16 +20,11 @@ import { absUrl } from '../lib/urls';
     ]),
   ]}
 >
-  <header class="page-hero">
-    <div class="wrap">
-      <p class="kicker">Wiedza</p>
-      <h1 class="page-title">Dla zamawiającego publicznego</h1>
-      <p class="lede">
-        Krótko: kim jesteśmy w postępowaniu, jakie roboty umiemy nazwać, czego nie obiecujemy
-        bez skanu. To nie jest poradnik prawny i nie zastępuje SIWZ.
-      </p>
-    </div>
-  </header>
+  <PageHero
+    kicker="Wiedza"
+    title="Dla zamawiającego publicznego"
+    lede="Krótko: kim jesteśmy w postępowaniu, jakie roboty umiemy nazwać, czego nie obiecujemy bez skanu. To nie jest poradnik prawny i nie zastępuje SIWZ."
+  />
 
   <section class="section wrap">
     <article class="prose">

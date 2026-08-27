@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 import ProofBar from '../components/ProofBar.astro';
 import ProofSlots from '../components/ProofSlots.astro';
 import IllustrativePhoto from '../components/IllustrativePhoto.astro';
@@ -21,16 +22,11 @@ import { absUrl } from '../lib/urls';
     ]),
   ]}
 >
-  <header class="page-hero">
-    <div class="wrap">
-      <p class="kicker">Dane do weryfikacji</p>
-      <h1 class="page-title">{site.legalName}</h1>
-      <p class="lede">
-        Jednoosobowa działalność gospodarcza. Nie ma KRS — jest NIP i REGON. Rok w stopce:
-        {site.foundedYear} (CEIDG / katalogi). Nie piszemy roku 1999 z katalogów WeNet.
-      </p>
-    </div>
-  </header>
+  <PageHero
+    kicker="Dane do weryfikacji"
+    title={site.legalName}
+    lede={`Jednoosobowa działalność gospodarcza. Nie ma KRS — jest NIP i REGON. Rok w stopce: ${site.foundedYear} (CEIDG / katalogi). Nie piszemy roku 1999 z katalogów WeNet.`}
+  />
 
   <ProofBar />
 

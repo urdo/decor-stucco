@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { fullAddress, site } from '../data/site';
 import { breadcrumbNode } from '../lib/jsonld';
@@ -17,16 +18,11 @@ import { absUrl } from '../lib/urls';
     ]),
   ]}
 >
-  <header class="page-hero">
-    <div class="wrap">
-      <p class="kicker">Kontakt</p>
-      <h1 class="page-title">Zapytanie o ofertę lub postępowanie</h1>
-      <p class="lede">
-        Napisz, jaki obiekt i jaki zakres. Telefon i e-mail z katalogów internetowych nie są
-        na stronie, dopóki właściciel nie wskaże danych do publikacji.
-      </p>
-    </div>
-  </header>
+  <PageHero
+    kicker="Kontakt"
+    title="Zapytanie o ofertę lub postępowanie"
+    lede="Napisz, jaki obiekt i jaki zakres. Telefon i e-mail z katalogów internetowych nie są na stronie, dopóki właściciel nie wskaże danych do publikacji."
+  />
 
   <section class="section wrap split">
     <ContactForm />

@@ -18,7 +18,9 @@ const featured = (await getCollection('realizacje'))
 
 <Base
   title={site.name}
+  bodyClass="home"
   description="Decor Stucco Zenon Szczygieł — wykonawca robót elewacyjnych, izolacyjnych i renowacyjnych na obiektach publicznych. NIP, realizacje z nazwami, Mazowsze i Świętokrzyskie."
+  ogImage="images/hero-building.jpg"
   jsonLd={[
     itemListNode({
       url: absUrl(),
@@ -30,16 +32,41 @@ const featured = (await getCollection('realizacje'))
     }),
   ]}
 >
-  <section class="hero wrap">
-    <p class="kicker">Wykonawca obiektów publicznych</p>
-    <h1>{site.tagline}</h1>
-    <p class="lede">
-      {site.legalName}. Realizacje dla uczelni, urzędów, sądów i instytucji kultury.
-      {site.reach}. To nie jest sklep ze sztukaterią — to wizytówka wykonawcy z nazwanymi gmachami.
-    </p>
-    <div class="hero-actions">
-      <a class="btn" href={`${base}kontakt/`}>Zapytanie o ofertę</a>
-      <a class="btn btn-ghost" href={`${base}realizacje/`}>Nazwane realizacje</a>
+  <section class="hero-full">
+    <div class="hero-full-media">
+      <img
+        src={`${base}images/hero-building.jpg`}
+        alt="Rozświetlona neoklasyczna fasada gmachu instytucji publicznej o zmierzchu."
+        width="1600"
+        height="900"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="hero-full-inner">
+      <h1 class="hero-title">Nazwane realizacje.<br />Sprawdzalne dane.</h1>
+      <p class="hero-sub">Fasady dla instytucji publicznych, które stoją na lata.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href={`${base}kontakt/`}>Zapytanie</a>
+        <a class="btn btn-outline" href={`${base}realizacje/`}>Realizacje</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase wrap">
+    <p class="eyebrow">Wybrane realizacje</p>
+    <div class="showcase-grid">
+      <a class="showcase-card" href={`${base}realizacje/`}>
+        <img src={`${base}images/showcase-uw.jpg`} alt="Uniwersytet Warszawski — fasada." loading="lazy" />
+        <span class="showcase-name">Uniwersytet Warszawski</span>
+      </a>
+      <a class="showcase-card" href={`${base}realizacje/`}>
+        <img src={`${base}images/showcase-pg.jpg`} alt="Politechnika Gdańska — gmach główny." loading="lazy" />
+        <span class="showcase-name">Politechnika Gdańska</span>
+      </a>
+      <a class="showcase-card" href={`${base}realizacje/`}>
+        <img src={`${base}images/showcase-mein.jpg`} alt="Ministerstwo Edukacji i Nauki — fasada." loading="lazy" />
+        <span class="showcase-name">Ministerstwo Edukacji i Nauki</span>
+      </a>
     </div>
   </section>
 

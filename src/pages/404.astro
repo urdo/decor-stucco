@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 
 const base = import.meta.env.BASE_URL;
 ---
@@ -9,15 +10,11 @@ const base = import.meta.env.BASE_URL;
   description="Podany adres nie istnieje na stronie Decor Stucco."
   noindex
 >
-  <header class="page-hero">
-    <div class="wrap">
-      <p class="kicker">404</p>
-      <h1 class="page-title">Nie ma takiej strony</h1>
-      <p class="lede">
-        Sprawdź adres albo wróć do <a href={base}>strony głównej</a>,
-        <a href={`${base}realizacje/`}>realizacji</a>
-        albo <a href={`${base}kontakt/`}>kontaktu</a>.
-      </p>
-    </div>
-  </header>
+  <PageHero kicker="404" title="Nie ma takiej strony">
+    <p class="lede">
+      Sprawdź adres albo wróć do <a href={base}>strony głównej</a>,
+      <a href={`${base}realizacje/`}>realizacji</a>
+      albo <a href={`${base}kontakt/`}>kontaktu</a>.
+    </p>
+  </PageHero>
 </Base>

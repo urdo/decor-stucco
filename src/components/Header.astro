@@ -25,7 +25,6 @@ function isCurrent(itemHref: string) {
   <div class="wrap header-inner">
     <a class="wordmark" href={base}>
       <span class="wordmark-name">{site.name}</span>
-      <span class="wordmark-sub">{site.owner}</span>
     </a>
     <nav class="nav-desktop" aria-label="Główne">
       {
@@ -35,7 +34,6 @@ function isCurrent(itemHref: string) {
           </a>
         ))
       }
-      <a class="btn" href={href('/kontakt/')}>Zapytanie</a>
     </nav>
     <button
       class="menu-toggle"
@@ -57,7 +55,6 @@ function isCurrent(itemHref: string) {
         </a>
       ))
     }
-    <a href={href('/kontakt/')}>Zapytanie o ofertę</a>
   </nav>
 </header>
 

@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
 import IllustrativePhoto from '../../components/IllustrativePhoto.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { breadcrumbNode, serviceNode } from '../../lib/jsonld';
@@ -37,13 +38,7 @@ const pageUrl = absUrl(`uslugi/${item.id}/`);
     ]),
   ]}
 >
-  <header class="page-hero">
-    <div class="wrap">
-      <p class="kicker">{item.data.kicker}</p>
-      <h1 class="page-title">{item.data.title}</h1>
-      <p class="lede">{item.data.summary}</p>
-    </div>
-  </header>
+  <PageHero kicker={item.data.kicker} title={item.data.title} lede={item.data.summary} />
 
   <section class="section wrap split">
     <article class="prose">

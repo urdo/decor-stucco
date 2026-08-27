@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
 import PhotoFrame from '../../components/PhotoFrame.astro';
 import ProofSlots from '../../components/ProofSlots.astro';
 import CtaBand from '../../components/CtaBand.astro';
@@ -47,17 +48,13 @@ const pageUrl = absUrl(`realizacje/${item.id}/`);
     ]),
   ]}
 >
-  <header class="page-hero">
-    <div class="wrap">
-      <p class="kicker">{item.data.year} · {pillarLabel}</p>
-      <h1 class="page-title">{item.data.object}</h1>
-      <ul class="meta-list">
-        <li><span>Zamawiający</span> {item.data.client}</li>
-        <li><span>Lokalizacja</span> {item.data.location}</li>
-        <li><span>Zakres</span> {item.data.scope}</li>
-      </ul>
-    </div>
-  </header>
+  <PageHero kicker={`${item.data.year} · ${pillarLabel}`} title={item.data.object}>
+    <ul class="meta-list">
+      <li><span>Zamawiający</span> {item.data.client}</li>
+      <li><span>Lokalizacja</span> {item.data.location}</li>
+      <li><span>Zakres</span> {item.data.scope}</li>
+    </ul>
+  </PageHero>
 
   <section class="section wrap split">
     <article class="prose">

@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
 import ObjectRow from '../../components/ObjectRow.astro';
 import PhotoFrame from '../../components/PhotoFrame.astro';
 import CtaBand from '../../components/CtaBand.astro';
@@ -32,16 +33,11 @@ const rest = all.filter((item) => !item.data.featured);
     ]),
   ]}
 >
-  <header class="page-hero">
-    <div class="wrap">
-      <p class="kicker">Portfel</p>
-      <h1 class="page-title">Obiekt, zamawiający, rok</h1>
-      <p class="lede">
-        Lista z publicznych ogłoszeń o zamówieniach. Nie wstawiamy zdjęć stockowych jako
-        dokumentacji robót. Kwot z Atlasa i eGospodarki tu nie ma.
-      </p>
-    </div>
-  </header>
+  <PageHero
+    kicker="Portfel"
+    title="Obiekt, zamawiający, rok"
+    lede="Lista z publicznych ogłoszeń o zamówieniach. Nie wstawiamy zdjęć stockowych jako dokumentacji robót. Kwot z Atlasa i eGospodarki tu nie ma."
+  />
 
   <section class="section wrap split">
     <div>

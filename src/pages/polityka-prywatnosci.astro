@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 import { fullAddress, site } from '../data/site';
 ---
 
@@ -7,12 +8,7 @@ import { fullAddress, site } from '../data/site';
   title="Polityka prywatności"
   description="Polityka prywatności strony Decor Stucco — administrator, formularz kontaktowy, dane publikowane z rejestrów."
 >
-  <header class="page-hero">
-    <div class="wrap">
-      <p class="kicker">RODO</p>
-      <h1 class="page-title">Polityka prywatności</h1>
-    </div>
-  </header>
+  <PageHero kicker="RODO" title="Polityka prywatności" />
 
   <section class="section wrap">
     <article class="prose">

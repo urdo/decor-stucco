@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 
 const credits = [
   {
@@ -44,16 +45,11 @@ const credits = [
   title="Zdjęcia ilustracyjne"
   description="Atrybucja zdjęć użytych na stronie Decor Stucco. Żadne nie jest dokumentacją robót firmy."
 >
-  <header class="page-hero">
-    <div class="wrap">
-      <p class="kicker">Atrybucja</p>
-      <h1 class="page-title">Zdjęcia ilustracyjne</h1>
-      <p class="lede">
-        Kadry z Pexels i Wikimedia Commons. Służą jako klimat materiałowy i architektoniczny. Nie
-        przedstawiają budów Decor Stucco.
-      </p>
-    </div>
-  </header>
+  <PageHero
+    kicker="Atrybucja"
+    title="Zdjęcia ilustracyjne"
+    lede="Kadry z Pexels i Wikimedia Commons. Służą jako klimat materiałowy i architektoniczny. Nie przedstawiają budów Decor Stucco."
+  />
 
   <section class="section wrap">
     <ul class="object-grid" style="list-style: none; padding: 0;">
