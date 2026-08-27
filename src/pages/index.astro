@@ -13,17 +13,20 @@ const featured = (await getCollection('realizacje'))
 const cards = [
   {
     name: 'Uniwersytet Warszawski',
-    image: 'images/card-1.jpg',
+    image: 'images/zabytki.jpg',
+    objectPosition: 'center 30%',
     href: `${base}realizacje/`,
   },
   {
     name: 'Politechnika Gdańska',
-    image: 'images/card-2.jpg',
+    image: 'images/elewacja.jpg',
+    objectPosition: 'center 35%',
     href: `${base}realizacje/`,
   },
   {
     name: 'Ministerstwo Edukacji i Nauki',
-    image: 'images/card-3.jpg',
+    image: 'images/hero-cinematic-dusk.jpg',
+    objectPosition: '72% 32%',
     href: `${base}realizacje/`,
   },
 ];
@@ -60,7 +63,10 @@ const heroSrc = `${base}images/hero-cinematic-dusk.jpg`;
       <div class="hero-scrim"></div>
     </div>
     <div class="hero-content wrap">
-      <h1>Nazwane realizacje.<br />Sprawdzalne dane.</h1>
+      <h1>
+        <span class="hero-line">Nazwane realizacje.</span>
+        <span class="hero-line">Sprawdzalne dane.</span>
+      </h1>
       <p class="lede">Fasady dla instytucji publicznych, które stoją na lata.</p>
       <div class="hero-actions">
         <a class="btn" href={`${base}kontakt/`}>Zapytanie</a>
@@ -82,6 +88,7 @@ const heroSrc = `${base}images/hero-cinematic-dusk.jpg`;
                 width="900"
                 height="560"
                 loading="lazy"
+                style={`object-position: ${card.objectPosition}`}
               />
               <span class="featured-card-caption">
                 <span class="featured-card-name">{card.name}</span>
