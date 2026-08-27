@@ -106,13 +106,21 @@ a:hover {
 
 /* ——— Header ——— */
 .site-header {
-  position: sticky;
+  position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 40;
-  background: rgb(10 10 10 / 72%);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.35s var(--ease-out), border-color 0.35s var(--ease-out);
+}
+
+.site-header.is-solid {
+  position: sticky;
+  background: rgb(10 10 10 / 88%);
   backdrop-filter: blur(16px) saturate(1.2);
-  border-bottom: 1px solid rgb(255 255 255 / 8%);
-  transition: background 0.35s var(--ease-out);
+  border-bottom-color: rgb(255 255 255 / 8%);
 }
 
 .header-inner {
@@ -282,6 +290,7 @@ a:hover {
   display: none;
   border-top: 1px solid var(--line);
   padding: var(--space-4) 0 var(--space-5);
+  background: rgb(10 10 10 / 96%);
 }
 
 .nav-mobile.is-open {
@@ -306,12 +315,12 @@ main {
   min-height: 60vh;
 }
 
-/* ——— Cinematic hero ——— */
+/* ——— Cinematic hero (mockup D) ——— */
 .hero-cinematic {
   position: relative;
-  min-height: min(92vh, 56rem);
+  min-height: 100svh;
   display: grid;
-  align-items: end;
+  align-items: center;
   overflow: hidden;
   color: var(--ink);
 }
@@ -326,38 +335,31 @@ main {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 40%;
-  filter: brightness(0.55) contrast(1.08) saturate(0.85);
-  transform: scale(1.06);
-  animation: hero-drift 28s var(--ease-out) infinite alternate;
+  object-position: center center;
+  filter: none;
+  transform: scale(1.02);
+  animation: hero-drift 32s var(--ease-out) infinite alternate;
 }
 
 .hero-scrim {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(90deg, rgb(8 7 6 / 88%) 0%, rgb(8 7 6 / 55%) 42%, rgb(8 7 6 / 28%) 100%),
-    linear-gradient(0deg, rgb(8 7 6 / 92%) 0%, rgb(8 7 6 / 35%) 42%, rgb(8 7 6 / 45%) 100%);
+  /* Lekki dodatkowy fade — zdjęcie hero już ma ciemną lewą strefę jak w mockupie */
+  background: linear-gradient(
+    90deg,
+    rgb(6 8 12 / 35%) 0%,
+    rgb(6 8 12 / 12%) 34%,
+    transparent 55%
+  );
   pointer-events: none;
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
-  padding: calc(var(--header) + var(--space-7)) 0 var(--space-8);
-  max-width: 40rem;
+  padding: calc(var(--header) + var(--space-6)) 0 var(--space-8);
+  max-width: 34rem;
   margin-right: auto;
-}
-
-.hero-brand {
-  margin: 0 0 var(--space-4);
-  font-family: var(--font-display);
-  font-size: clamp(2.6rem, 8vw, 4.75rem);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  line-height: 0.95;
-  animation: fade-rise 0.9s var(--ease-out) both;
 }
 
 .kicker {
@@ -368,19 +370,17 @@ main {
   color: var(--accent);
 }
 
-.hero-cinematic .kicker {
-  animation: fade-rise 0.8s var(--ease-out) 0.08s both;
-}
-
 .hero-cinematic h1 {
   margin: 0 0 var(--space-4);
   font-family: var(--font-display);
-  font-size: clamp(1.55rem, 3.4vw, 2.35rem);
-  font-weight: 600;
-  line-height: 1.2;
-  max-width: 22ch;
+  font-size: clamp(2rem, 4.6vw, 3.35rem);
+  font-weight: 700;
+  line-height: 1.12;
+  max-width: 14ch;
+  letter-spacing: -0.01em;
   text-wrap: balance;
-  animation: fade-rise 0.9s var(--ease-out) 0.16s both;
+  color: #fff;
+  animation: fade-rise 0.9s var(--ease-out) both;
 }
 
 .lede {
@@ -391,20 +391,104 @@ main {
 }
 
 .hero-cinematic .lede {
-  color: rgb(243 238 230 / 82%);
-  animation: fade-rise 0.9s var(--ease-out) 0.24s both;
+  max-width: 28rem;
+  color: rgb(255 255 255 / 86%);
+  font-size: 1.125rem;
+  line-height: 1.55;
+  animation: fade-rise 0.9s var(--ease-out) 0.12s both;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
-  animation: fade-rise 0.9s var(--ease-out) 0.32s both;
+  animation: fade-rise 0.9s var(--ease-out) 0.22s both;
+}
+
+.hero-cinematic .btn {
+  min-width: 9.5rem;
+  padding: 0.85rem 1.4rem;
+}
+
+.featured-strip {
+  background: #070809;
+  padding: var(--space-7) 0 var(--space-8);
+  border-top: 1px solid rgb(255 255 255 / 6%);
+}
+
+.featured-label {
+  margin: 0 0 var(--space-5);
+  font-size: var(--text-xs);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.featured-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  max-width: 12rem;
+}
+
+.featured-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.featured-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+  aspect-ratio: 16 / 10;
+  background: #111;
+}
+
+.featured-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease-out);
+  filter: brightness(0.72);
+}
+
+.featured-card:hover img {
+  transform: scale(1.05);
+  filter: brightness(0.85);
+}
+
+.featured-card-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-5);
+  background: linear-gradient(0deg, rgb(0 0 0 / 85%) 0%, transparent 100%);
+  display: grid;
+  gap: 0.25rem;
+}
+
+.featured-card-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.featured-card-meta {
+  font-size: var(--text-sm);
+  color: var(--muted);
 }
 
 @media (max-width: 719px) {
   .hero-cinematic {
-    min-height: min(100svh, 44rem);
+    min-height: 100svh;
     align-items: end;
   }
 
@@ -413,9 +497,17 @@ main {
     max-width: none;
   }
 
+  .hero-media img {
+    object-position: center center;
+  }
+
   .hero-scrim {
-    background:
-      linear-gradient(0deg, rgb(8 7 6 / 94%) 0%, rgb(8 7 6 / 55%) 48%, rgb(8 7 6 / 40%) 100%);
+    background: linear-gradient(
+      0deg,
+      rgb(6 8 12 / 72%) 0%,
+      rgb(6 8 12 / 28%) 45%,
+      rgb(6 8 12 / 18%) 100%
+    );
   }
 
   .hero-actions {
@@ -425,6 +517,13 @@ main {
 
   .hero-actions .btn {
     width: 100%;
+  }
+}
+
+@media (min-width: 720px) {
+  .featured-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
   }
 }
 
@@ -964,15 +1063,14 @@ main {
   }
 
   .hero-media img,
-  .hero-brand,
-  .hero-cinematic .kicker,
   .hero-cinematic h1,
   .hero-cinematic .lede,
   .hero-actions,
   .nav-mobile.is-open,
   .btn,
   .service-card,
-  .object-name {
+  .object-name,
+  .featured-card img {
     animation: none !important;
     transition: none !important;
   }
@@ -1038,7 +1136,7 @@ main {
 
 @media (min-width: 960px) {
   .hero-content {
-    padding-top: calc(var(--header) + var(--space-9));
-    padding-bottom: var(--space-9);
+    padding-top: calc(var(--header) + var(--space-7));
+    padding-bottom: var(--space-8);
   }
 }
