@@ -2,11 +2,20 @@
 import Base from '../layouts/Base.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { fullAddress, site } from '../data/site';
+import { breadcrumbNode } from '../lib/jsonld';
+import { absUrl } from '../lib/urls';
 ---
 
 <Base
   title="Kontakt"
   description="Zapytanie o ofertę lub udział w postępowaniu — Decor Stucco Zenon Szczygieł. Formularz, dane JDG, NIP i adres siedziby."
+  pageType="ContactPage"
+  jsonLd={[
+    breadcrumbNode([
+      { name: 'Start', url: absUrl() },
+      { name: 'Kontakt', url: absUrl('kontakt/') },
+    ]),
+  ]}
 >
   <header class="page-hero">
     <div class="wrap">

@@ -3,6 +3,8 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import IllustrativePhoto from '../../components/IllustrativePhoto.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import { breadcrumbNode, serviceNode } from '../../lib/jsonld';
+import { absUrl } from '../../lib/urls';
 
 export async function getStaticPaths() {
   const uslugi = await getCollection('uslugi');
@@ -15,9 +17,26 @@ export async function getStaticPaths() {
 const { item } = Astro.props;
 const { Content } = await render(item);
 const base = import.meta.env.BASE_URL;
+const pageUrl = absUrl(`uslugi/${item.id}/`);
 ---
 
-<Base title={item.data.title} description={item.data.summary}>
+<Base
+  title={item.data.title}
+  description={item.data.summary}
+  ogImage={item.data.image}
+  jsonLd={[
+    serviceNode({
+      name: item.data.title,
+      description: item.data.summary,
+      url: pageUrl,
+    }),
+    breadcrumbNode([
+      { name: 'Start', url: absUrl() },
+      { name: 'Usługi', url: absUrl('uslugi/') },
+      { name: item.data.title, url: pageUrl },
+    ]),
+  ]}
+>
   <header class="page-hero">
     <div class="wrap">
       <p class="kicker">{item.data.kicker}</p>

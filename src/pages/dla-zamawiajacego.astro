@@ -1,12 +1,23 @@
 ---
 import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
+import { faqItems } from '../data/faq';
 import { site } from '../data/site';
+import { breadcrumbNode, faqQuestions } from '../lib/jsonld';
+import { absUrl } from '../lib/urls';
 ---
 
 <Base
   title="Dla zamawiającego"
   description="Informacje dla zamawiającego publicznego: jak czytać zakres Decor Stucco, jakie dokumenty są na stronie, czego nie ma, FAQ pod SIWZ."
+  pageType="FAQPage"
+  mainEntity={faqQuestions()}
+  jsonLd={[
+    breadcrumbNode([
+      { name: 'Start', url: absUrl() },
+      { name: 'Dla zamawiającego', url: absUrl('dla-zamawiajacego/') },
+    ]),
+  ]}
 >
   <header class="page-hero">
     <div class="wrap">
@@ -47,65 +58,14 @@ import { site } from '../data/site';
 
     <div class="faq" style="margin-top: 3rem; max-width: 40rem;">
       <h2 class="page-title" style="font-size: 1.85rem; margin-bottom: 1rem;">Pytania</h2>
-
-      <details>
-        <summary>Czy to firma od sztukaterii i tynków dekoracyjnych?</summary>
-        <p>
-          Nazwa pochodzi z rzemiosła. Publiczny portfel to roboty budowlane na obiektach
-          publicznych. Sztukaterię salonową jako ofertę sklepową potwierdzimy tylko, jeśli
-          właściciel tak zdecyduje.
-        </p>
-      </details>
-      <details>
-        <summary>Czy startujecie wyłącznie jako wykonawca zamówienia publicznego?</summary>
-        <p>
-          Publicznie widać wygrane postępowania. Czy firma bierze podwykonawstwo od generalnego
-          — pytanie do właściciela. Formularz przyjmuje oba typy zapytań.
-        </p>
-      </details>
-      <details>
-        <summary>Czy macie pozwolenie konserwatorskie WKZ?</summary>
-        <p>
-          Publicznie nie znaleziono numeru pozwolenia. Na obiektach zabytkowych (dworek, sąd,
-          PKiN, Łucznica) widać roboty w reżimie dziedzictwa. Numer i skan — po stronie
-          właściciela, bez zgadywania.
-        </p>
-      </details>
-      <details>
-        <summary>Jaka jest gwarancja w latach?</summary>
-        <p>
-          Nie podajemy liczby, której nie ma w dokumencie. Ramka na stronie realizacji czeka na
-          wartość z umowy / karty gwarancyjnej.
-        </p>
-      </details>
-      <details>
-        <summary>Czy podajecie doświadczenie w złotych?</summary>
-        <p>
-          Nie. Agregatory (Atlas, eGospodarka) liczą inaczej; suma z portalu nie idzie na
-          stronę. Do SIWZ liczy się załącznik, który podpisze wykonawca.
-        </p>
-      </details>
-      <details>
-        <summary>Jaki jest zasięg?</summary>
-        <p>
-          {site.reachNote} Obietnica „cała Polska” pojawi się wyłącznie po decyzji właściciela.
-        </p>
-      </details>
-      <details>
-        <summary>Jak odróżnić Decor Stucco od ARCO-BUD?</summary>
-        <p>
-          To osobne podmioty. Na tej stronie nie ma przetargów ARCO-BUD. Ten sam gmach (np.
-          Elektronika PW) może mieć roboty obu marek w różnych latach — nie mieszamy ich w
-          jednym portfolio.
-        </p>
-      </details>
-      <details>
-        <summary>Czy zdjęcia na stronie to Wasze budowy?</summary>
-        <p>
-          Nie. Zdjęcia z Unsplash/Pexels są ilustracyjne i tak podpisane. Realizacje mają puste
-          ramki na fotografię obiektu od właściciela.
-        </p>
-      </details>
+      {
+        faqItems.map((item) => (
+          <details>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))
+      }
     </div>
   </section>
 

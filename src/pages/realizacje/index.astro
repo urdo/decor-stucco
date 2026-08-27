@@ -4,6 +4,8 @@ import Base from '../../layouts/Base.astro';
 import ObjectRow from '../../components/ObjectRow.astro';
 import PhotoFrame from '../../components/PhotoFrame.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import { breadcrumbNode, itemListNode } from '../../lib/jsonld';
+import { absUrl } from '../../lib/urls';
 
 const base = import.meta.env.BASE_URL;
 const all = (await getCollection('realizacje')).sort((a, b) => b.data.year - a.data.year);
@@ -14,6 +16,21 @@ const rest = all.filter((item) => !item.data.featured);
 <Base
   title="Realizacje"
   description="Nazwane realizacje Decor Stucco: obiekt, zamawiający, rok i zakres z ogłoszenia publicznego. Bez kwot z agregatorów."
+  pageType="CollectionPage"
+  jsonLd={[
+    itemListNode({
+      url: absUrl('realizacje/'),
+      name: 'Realizacje Decor Stucco',
+      items: all.map((item) => ({
+        name: `${item.data.year} ${item.data.object}`,
+        url: absUrl(`realizacje/${item.id}/`),
+      })),
+    }),
+    breadcrumbNode([
+      { name: 'Start', url: absUrl() },
+      { name: 'Realizacje', url: absUrl('realizacje/') },
+    ]),
+  ]}
 >
   <header class="page-hero">
     <div class="wrap">

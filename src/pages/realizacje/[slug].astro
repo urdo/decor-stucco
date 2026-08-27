@@ -4,6 +4,8 @@ import Base from '../../layouts/Base.astro';
 import PhotoFrame from '../../components/PhotoFrame.astro';
 import ProofSlots from '../../components/ProofSlots.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import { breadcrumbNode, realizationNode } from '../../lib/jsonld';
+import { absUrl } from '../../lib/urls';
 
 export async function getStaticPaths() {
   const items = await getCollection('realizacje');
@@ -22,11 +24,28 @@ const pillarLabel = {
   zabytki: 'Zabytki',
   inne: 'Zakres towarzyszący',
 }[item.data.pillar];
+const pageUrl = absUrl(`realizacje/${item.id}/`);
 ---
 
 <Base
   title={item.data.title}
   description={`${item.data.object}, ${item.data.client}, ${item.data.year}. ${item.data.scope}`}
+  jsonLd={[
+    realizationNode({
+      url: pageUrl,
+      object: item.data.object,
+      client: item.data.client,
+      year: item.data.year,
+      location: item.data.location,
+      scope: item.data.scope,
+      pillar: pillarLabel,
+    }),
+    breadcrumbNode([
+      { name: 'Start', url: absUrl() },
+      { name: 'Realizacje', url: absUrl('realizacje/') },
+      { name: item.data.object, url: pageUrl },
+    ]),
+  ]}
 >
   <header class="page-hero">
     <div class="wrap">

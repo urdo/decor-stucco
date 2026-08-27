@@ -5,11 +5,21 @@ import ProofSlots from '../components/ProofSlots.astro';
 import IllustrativePhoto from '../components/IllustrativePhoto.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { fullAddress, site } from '../data/site';
+import { breadcrumbNode } from '../lib/jsonld';
+import { absUrl } from '../lib/urls';
 ---
 
 <Base
   title="O firmie"
   description="Decor Stucco Zenon Szczygieł — JDG, NIP, REGON, siedziba w Miedzianej Górze, roboty na obiektach publicznych od 2009."
+  pageType="AboutPage"
+  ogImage="images/wapien.jpg"
+  jsonLd={[
+    breadcrumbNode([
+      { name: 'Start', url: absUrl() },
+      { name: 'O firmie', url: absUrl('o-firmie/') },
+    ]),
+  ]}
 >
   <header class="page-hero">
     <div class="wrap">
