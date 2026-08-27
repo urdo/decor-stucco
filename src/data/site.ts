@@ -26,10 +26,10 @@ export const site = {
 } as const;
 
 export const nav = [
-  { href: '/uslugi/', label: 'Usługi' },
+  { href: '/o-firmie/', label: 'O nas' },
   { href: '/realizacje/', label: 'Realizacje' },
-  { href: '/o-firmie/', label: 'O firmie' },
-  { href: '/dla-zamawiajacego/', label: 'Dla zamawiającego' },
+  { href: '/uslugi/', label: 'Technologie' },
+  { href: '/dla-zamawiajacego/', label: 'Jakość' },
   { href: '/kontakt/', label: 'Kontakt' },
 ] as const;
 

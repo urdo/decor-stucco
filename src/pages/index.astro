@@ -1,24 +1,44 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import ProofBar from '../components/ProofBar.astro';
-import ObjectRow from '../components/ObjectRow.astro';
-import IllustrativePhoto from '../components/IllustrativePhoto.astro';
-import CtaBand from '../components/CtaBand.astro';
 import { site } from '../data/site';
 import { itemListNode } from '../lib/jsonld';
 import { absUrl } from '../lib/urls';
 
 const base = import.meta.env.BASE_URL;
-const uslugi = (await getCollection('uslugi')).sort((a, b) => a.data.order - b.data.order);
 const featured = (await getCollection('realizacje'))
   .filter((item) => item.data.featured)
   .sort((a, b) => b.data.year - a.data.year);
+
+const cards = [
+  {
+    name: 'Uniwersytet Warszawski',
+    image: 'images/zabytki.jpg',
+    objectPosition: 'center 30%',
+    href: `${base}realizacje/`,
+  },
+  {
+    name: 'Politechnika Gdańska',
+    image: 'images/elewacja.jpg',
+    objectPosition: 'center 35%',
+    href: `${base}realizacje/`,
+  },
+  {
+    name: 'Ministerstwo Edukacji i Nauki',
+    image: 'images/hero-cinematic-dusk.jpg',
+    objectPosition: '72% 32%',
+    href: `${base}realizacje/`,
+  },
+];
+
+const heroSrc = `${base}images/hero-cinematic-dusk.jpg`;
 ---
 
 <Base
   title={site.name}
   description="Decor Stucco Zenon Szczygieł — wykonawca robót elewacyjnych, izolacyjnych i renowacyjnych na obiektach publicznych. NIP, realizacje z nazwami, Mazowsze i Świętokrzyskie."
+  ogImage="images/hero-cinematic-dusk.jpg"
+  hideFooter
   jsonLd={[
     itemListNode({
       url: absUrl(),
@@ -30,92 +50,53 @@ const featured = (await getCollection('realizacje'))
     }),
   ]}
 >
-  <section class="hero wrap">
-    <p class="kicker">Wykonawca obiektów publicznych</p>
-    <h1>{site.tagline}</h1>
-    <p class="lede">
-      {site.legalName}. Realizacje dla uczelni, urzędów, sądów i instytucji kultury.
-      {site.reach}. To nie jest sklep ze sztukaterią — to wizytówka wykonawcy z nazwanymi gmachami.
-    </p>
-    <div class="hero-actions">
-      <a class="btn" href={`${base}kontakt/`}>Zapytanie o ofertę</a>
-      <a class="btn btn-ghost" href={`${base}realizacje/`}>Nazwane realizacje</a>
-    </div>
-  </section>
-
-  <ProofBar />
-
-  <section class="section wrap">
-    <div class="split">
-      <div>
-        <div class="section-head">
-          <p class="kicker">Zakres</p>
-          <h2>Trzy filary, nazwane robotami</h2>
-          <p>
-            Oferta wynika z tego, co widać w zamówieniach publicznych: elewacje, izolacje i
-            renowacja zabytków. Nie z numeru PKD i nie z nazwy „stucco”.
-          </p>
-        </div>
-        <div class="card-grid" style="grid-template-columns: 1fr;">
-          {
-            uslugi.map((item) => (
-              <a class="service-card" href={`${base}uslugi/${item.id}/`}>
-                <span class="badge">0{item.data.order}</span>
-                <h3>{item.data.title}</h3>
-                <p>{item.data.summary}</p>
-                <span class="more">Zakres →</span>
-              </a>
-            ))
-          }
-        </div>
-      </div>
-      <IllustrativePhoto
-        src="images/elewacja.jpg"
-        alt="Jasna fasada budynku, ujęcie architektoniczne."
+  <section class="hero-cinematic" aria-label="Wstęp">
+    <div class="hero-media" aria-hidden="true">
+      <img
+        src={heroSrc}
+        alt=""
+        width="2400"
+        height="1600"
+        fetchpriority="high"
+        decoding="async"
       />
+      <div class="hero-scrim"></div>
+    </div>
+    <div class="hero-content wrap">
+      <h1>
+        <span class="hero-line">Nazwane realizacje.</span>
+        <span class="hero-line">Sprawdzalne dane.</span>
+      </h1>
+      <p class="lede">Fasady dla instytucji publicznych, które stoją na lata.</p>
+      <div class="hero-actions">
+        <a class="btn" href={`${base}kontakt/`}>Zapytanie</a>
+        <a class="btn btn-ghost" href={`${base}realizacje/`}>Realizacje</a>
+      </div>
     </div>
   </section>
 
-  <section class="section wrap">
-    <div class="section-head">
-      <p class="kicker">Portfel</p>
-      <h2>Obiekty z nazwą zamawiającego</h2>
-      <p>
-        To, czego nie mają prawie wszyscy konkurenci. Kwot z portali przetargowych tu nie ma —
-        są adres, instytucja i rok.
-      </p>
+  <section class="featured-strip" aria-label="Wybrane realizacje">
+    <div class="wrap">
+      <p class="featured-label">Wybrane realizacje</p>
+      <div class="featured-cards">
+        {
+          cards.map((card) => (
+            <a class="featured-card" href={card.href}>
+              <img
+                src={`${base}${card.image}`}
+                alt=""
+                width="900"
+                height="560"
+                loading="lazy"
+                style={`object-position: ${card.objectPosition}`}
+              />
+              <span class="featured-card-caption">
+                <span class="featured-card-name">{card.name}</span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
     </div>
-    <div class="object-grid">
-      {
-        featured.map((item) => (
-          <ObjectRow
-            href={`${base}realizacje/${item.id}/`}
-            year={item.data.year}
-            name={item.data.object}
-            meta={`${item.data.client} · ${item.data.location}`}
-          />
-        ))
-      }
-    </div>
-    <p style="margin-top: 1.5rem;">
-      <a href={`${base}realizacje/`}>Pełna lista realizacji</a>
-    </p>
   </section>
-
-  <section class="section wrap">
-    <div class="section-head">
-      <p class="kicker">Dla komisji</p>
-      <h2>Dane, które można sprawdzić</h2>
-      <p>
-        NIP {site.nip}, REGON {site.regon}, forma JDG, adres siedziby. Polisa OC, ISO i skany
-        referencji pojawią się, gdy właściciel je przekaże — wcześniej nie wymyślamy dokumentów.
-      </p>
-    </div>
-    <p>
-      <a class="btn btn-ghost" href={`${base}dla-zamawiajacego/`}>Informacje dla zamawiającego</a>
-      <a class="btn btn-ghost" href={`${base}o-firmie/`} style="margin-left: 0.5rem;">O firmie</a>
-    </p>
-  </section>
-
-  <CtaBand />
 </Base>

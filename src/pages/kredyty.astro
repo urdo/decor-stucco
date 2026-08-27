@@ -37,6 +37,34 @@ const credits = [
     license: 'CC BY 2.0',
     url: 'https://commons.wikimedia.org/wiki/File:Scaffolding_For_Renovation_(8054252206).jpg',
   },
+  {
+    file: 'hero-cinematic-dusk.jpg',
+    work: 'Neoklasyczna fasada o zmierzchu — klimat instytucji publicznej (ilustracja hero)',
+    author: 'Wygenerowane na potrzeby mockupu designu D',
+    license: 'użytek na stronie Decor Stucco',
+    url: '/kredyty/',
+  },
+  {
+    file: 'card-1.jpg',
+    work: 'Kadr ilustracyjny do karty realizacji (1)',
+    author: 'Wygenerowane na potrzeby mockupu designu D',
+    license: 'użytek na stronie Decor Stucco',
+    url: '/kredyty/',
+  },
+  {
+    file: 'card-2.jpg',
+    work: 'Kadr ilustracyjny do karty realizacji (2)',
+    author: 'Wygenerowane na potrzeby mockupu designu D',
+    license: 'użytek na stronie Decor Stucco',
+    url: '/kredyty/',
+  },
+  {
+    file: 'card-3.jpg',
+    work: 'Kadr ilustracyjny do karty realizacji (3)',
+    author: 'Wygenerowane na potrzeby mockupu designu D',
+    license: 'użytek na stronie Decor Stucco',
+    url: '/kredyty/',
+  },
 ];
 ---
 
@@ -49,8 +77,8 @@ const credits = [
       <p class="kicker">Atrybucja</p>
       <h1 class="page-title">Zdjęcia ilustracyjne</h1>
       <p class="lede">
-        Kadry z Pexels i Wikimedia Commons. Służą jako klimat materiałowy i architektoniczny. Nie
-        przedstawiają budów Decor Stucco.
+        Kadry z Pexels, Wikimedia Commons oraz ilustracje wygenerowane pod mockup kierunku D.
+        Służą jako klimat materiałowy i architektoniczny. Nie przedstawiają budów Decor Stucco.
       </p>
     </div>
   </header>
@@ -64,10 +92,16 @@ const credits = [
             <span>
               <span class="object-name">{item.work}</span>
               <p class="object-meta">
-                {item.author} · {item.license} ·{' '}
-                <a href={item.url} rel="noopener noreferrer">
-                  źródło
-                </a>
+                {item.author} · {item.license}
+                {item.url.startsWith('http') ? (
+                  <>
+                    {' '}
+                    ·{' '}
+                    <a href={item.url} rel="noopener noreferrer">
+                      źródło
+                    </a>
+                  </>
+                ) : null}
               </p>
             </span>
           </li>
