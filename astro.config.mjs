@@ -1,10 +1,10 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// Po podłączeniu domeny: SITE_URL=https://decorstucco.pl i BASE_PATH=/
-// Przy GitHub project pages: SITE_URL=https://<user>.github.io i BASE_PATH=/<repo>/
-const site = process.env.SITE_URL || 'https://decorstucco.pl';
-const base = process.env.BASE_PATH || '/';
+// Domyślnie GitHub Pages (project site). Po domenie:
+// SITE_URL=https://decorstucco.pl  BASE_PATH=/
+const site = process.env.SITE_URL || 'https://urdo.github.io';
+const base = process.env.BASE_PATH || '/decor-stucco/';
 
 export default defineConfig({
   site,

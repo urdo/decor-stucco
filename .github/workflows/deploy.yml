@@ -17,6 +17,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SITE_URL: ${{ vars.SITE_URL }}
+      BASE_PATH: ${{ vars.BASE_PATH }}
+      PUBLIC_WEB3FORMS_KEY: ${{ secrets.PUBLIC_WEB3FORMS_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,13 +28,6 @@ jobs:
         uses: withastro/action@v3
         with:
           node-version: 22
-        env:
-          # W repo: Settings → Secrets and variables → Actions → Variables
-          # SITE_URL=https://USER.github.io  BASE_PATH=/NAZWA-REPO/
-          # Po domenie: SITE_URL=https://decorstucco.pl  BASE_PATH=/
-          SITE_URL: ${{ vars.SITE_URL }}
-          BASE_PATH: ${{ vars.BASE_PATH }}
-          PUBLIC_WEB3FORMS_KEY: ${{ secrets.PUBLIC_WEB3FORMS_KEY }}
 
   deploy:
     needs: build
